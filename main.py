@@ -40,9 +40,11 @@ def handle_message(event):
     }]
     response = openai.ChatCompletion.create(
         model=CHAT_MODEL,
-        messages=messages
+        messages=messages,
+        temperature=0.7,
+        max_tokens=500
     )
-    content = response['choices'][0]['message']['content']
+    content = response.choices[0].message.content
 
     line_bot_api.reply_message(
         event.reply_token,
